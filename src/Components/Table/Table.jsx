@@ -12,7 +12,6 @@ import Paper from "@material-ui/core/Paper";
 import SimpleExpansionPanel from "./../Expantion/Expantion";
 import Draggable from "./../Dnd/Draggable/Draggable";
 import Droppable from "./../Dnd/Droppable/Droppable";
-import droppableStyle from "./TableStyle";
 
 const SimpleTable = () => {
   const createData = (Name, Gender, Age, Homeland, Grade) => {
@@ -55,7 +54,7 @@ const SimpleTable = () => {
       <div className="panel">
         <header className="panel-heading">User Information</header>
         <div className="panel-body">
-          <Paper id="no-more-tables">
+          <Paper>
             <Table>
               <TableHead>
                 <TableRow>
@@ -108,7 +107,6 @@ const SimpleTable = () => {
     <>
       <Droppable
         GetMode={mode => handleMode(mode)}
-        style={droppableStyle}
         GetReverseFilter={reverse => handleReverse(reverse)}
       />
       {expantionMode === false ? (

@@ -122,5 +122,4 @@ const SimpleTable = () => {
     </>
   );
 };
-
 export default SimpleTable;

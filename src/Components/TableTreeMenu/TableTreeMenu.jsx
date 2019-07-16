@@ -52,8 +52,9 @@ const TreeTable = () => {
             <TableCell align="left">{row.Grade}</TableCell>
           </TableRow>
           :
-          <>
-              <ExpansionPanel key={index} style={{ background: "#fafafa" }}>
+          <TableRow key={index}>
+              <TableCell colspan='5' align="left">
+            <ExpansionPanel key={index} style={{ background: "#fafafa" }}>
                 <ExpansionPanelSummary
                   key={index}
                   expandIcon={<ExpandMoreIcon />}
@@ -61,26 +62,21 @@ const TreeTable = () => {
                   id="panel1a-header"
                 >
                 <Typography component={"span"} key={index}>
-                  <TableRow key={index}>
-                    <TableCell align="left">{row.Name}</TableCell>
-                    <TableCell align="left">{row.Gender}</TableCell>
-                    <TableCell align="left">{row.Age}</TableCell>
-                    <TableCell align="left">{row.Homeland}</TableCell>
-                    <TableCell align="left">{row.Grade}</TableCell>
-                  </TableRow>
+                    {row.Name + row.Gender + row.Age + row.Homeland + row.Grade }
                 </Typography>
                 </ExpansionPanelSummary>
               {row.children.map((child,index) =>
                 <ExpansionPanelDetails key={index}>
                   <Grid item xs={12}>
                     <Typography component={"span"} key={index}>
-                      {renderNested(child)}
+                      {renderNested(child,index)}
                     </Typography>
                   </Grid>
                 </ExpansionPanelDetails>
-                )}
-              </ExpansionPanel>
-          </>
+              )}
+            </ExpansionPanel>
+            </TableCell>
+            </TableRow>
         }
     </>
     )
@@ -126,9 +122,7 @@ const TreeTable = () => {
   };
   /*----------------------------------------------------------------------------------*/
   return (
-    <>
-      {defaultRender()}
-    </>
+    <>{defaultRender()}</>
   );
 };
 

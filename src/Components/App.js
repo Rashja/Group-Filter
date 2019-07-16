@@ -17,7 +17,7 @@ const App = () => {
     <>
       <div className='button-change-title' >
         <Button onClick={handleMode} variant="contained" color="secondary">
-          {mode ? 'Table Tree' : 'Group Filter'}
+          {mode ? 'Tree Table' : 'Group Filter'}
         </Button>
       </div>
       {mode ? 

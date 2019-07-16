@@ -8,6 +8,6 @@ const initialRows=([
     { id: "6", Name: "Monica", Gender:"female", Age:18, Homeland:"Washington DC", Grade:89, parentId: "1" },
     { id: "7", Name: "Dva", Gender:"female", Age:20, Homeland:"Las Vegas", Grade:83, parentId: "1" },
     { id: "8", Name: "Chandler", Gender:"male", Age:10, Homeland:"Las Vegas", Grade:90, parentId: "6" },
-    { id: "8", Name: "Tyrande", Gender:"female", Age:17, Homeland:"tokyo", Grade:90, parentId: "3" },
+    { id: "9", Name: "Tyrande", Gender:"female", Age:17, Homeland:"tokyo", Grade:90, parentId: "3" },
   ]);
 export default initialRows;

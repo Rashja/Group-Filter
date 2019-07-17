@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState, useEffect, useRef } from "react";
 //material-ui
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -40,45 +39,51 @@ const TreeTable = () => {
      return out
  }
   /*--------------------------------------------------------------------------------*/
- const renderNested = (row,index) => {
+  const renderNested = (row,index) => {
     return(
-      <>
+        <>
         {row.children === undefined ?
-          <TableRow key={index}>
-            <TableCell align="left">{row.Name}</TableCell>
-            <TableCell align="left">{row.Gender}</TableCell>
-            <TableCell align="left">{row.Age}</TableCell>
-            <TableCell align="left">{row.Homeland}</TableCell>
-            <TableCell align="left">{row.Grade}</TableCell>
-          </TableRow>
-          :
-          <TableRow key={index}>
-              <TableCell colspan='5' align="left">
-            <ExpansionPanel key={index} style={{ background: "#fafafa" }}>
-                <ExpansionPanelSummary
-                  key={index}
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                >
-                <Typography component={"span"} key={index}>
-                    {row.Name + row.Gender + row.Age + row.Homeland + row.Grade }
-                </Typography>
-                </ExpansionPanelSummary>
-              {row.children.map((child,index) =>
-                <ExpansionPanelDetails key={index}>
-                  <Grid item xs={12}>
-                    <Typography component={"span"} key={index}>
-                      {renderNested(child,index)}
-                    </Typography>
-                  </Grid>
-                </ExpansionPanelDetails>
-              )}
-            </ExpansionPanel>
-            </TableCell>
+            <TableRow key={index}>
+              <TableCell align="left">{row.Name}</TableCell>
+              <TableCell align="left">{row.Gender}</TableCell>
+              <TableCell align="left">{row.Age}</TableCell>
+              <TableCell align="left">{row.Homeland}</TableCell>
+              <TableCell align="left">{row.Grade}</TableCell>
             </TableRow>
-        }
-    </>
+            :
+            <TableRow key={index}>
+                <TableCell style={{padding:0}} colspan='5' align="left">
+              <ExpansionPanel key={index} style={{ background: "#fafafa" }}>
+                  <ExpansionPanelSummary
+                    key={index}
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography component={"span"} key={index}>
+                    <TableRow key={index}>
+                        <TableCell align="left">{row.Name}</TableCell>
+                        <TableCell align="left">{row.Gender}</TableCell>
+                        <TableCell align="left">{row.Age}</TableCell>
+                        <TableCell align="left">{row.Homeland}</TableCell>
+                        <TableCell align="left">{row.Grade}</TableCell>
+                    </TableRow>
+                    </Typography>
+                  </ExpansionPanelSummary>
+                {row.children.map((child,index) =>
+                  <ExpansionPanelDetails key={index}>
+                    <Grid item xs={12}>
+                      <Typography component={"span"} key={index}>
+                        {renderNested(child,index)}
+                      </Typography>
+                    </Grid>
+                  </ExpansionPanelDetails>
+                )}
+              </ExpansionPanel>
+              </TableCell>
+              </TableRow>
+          }
+      </>
     )
  }
   /*-----------------------------------Default Render--------------------------------*/

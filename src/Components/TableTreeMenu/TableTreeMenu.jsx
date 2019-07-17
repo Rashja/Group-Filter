@@ -49,7 +49,7 @@ const TreeTable = () => {
         <>
             {rows.map(row=>
                 <> 
-                    <TableRow>
+                    <TableRow onClick={(e)=>handleChild(row.id)} >
                         <TableCell id={row.id} align="left">{row.Name}</TableCell>
                         <TableCell id={row.id} align="left">{row.Gender}</TableCell>
                         <TableCell id={row.id} align="left">{row.Age}</TableCell>

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+
 //material-ui
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -43,72 +44,96 @@ const TreeTable = () => {
         setChild([...child,id])
       }
   }
-  /*--------------------------------------------------------------------------------*/
+  /*-----------------------------------Render Nested-----------------------------------*/
+  const renderChildren=(children)=>{
+    return(
+      <>
+        {children.map(row=>
+        <>
+          <TableRow className='test' onClick={()=>handleChild(row.id)} >
+              <TableCell id={row.id} align="left"><span>{row.Name}</span></TableCell>
+              <TableCell id={row.id} align="left">{row.Gender}</TableCell>
+              <TableCell id={row.id} align="left">{row.Age}</TableCell>
+              <TableCell id={row.id} align="left">{row.Homeland}</TableCell>
+              <TableCell id={row.id} align="left">{row.Grade}</TableCell>
+          </TableRow>
+          {
+                     row.children
+                      &&
+                     row.children.length 
+                      && 
+                     child.indexOf(row.id) !==-1 
+                       ? 
+                       renderChildren(row.children)
+                       :
+                     null
+                    }
+          </>
+          )
+        }
+      </>
+    )
+  }
   const renderNested = (rows) => {
     return(
         <>
             {rows.map(row=>
-                <>
-                    <TableRow onClick={(e)=>handleChild(row.id)} >
+                <> 
+                    <TableRow onClick={()=>handleChild(row.id)} >
                         <TableCell id={row.id} align="left">{row.Name}</TableCell>
                         <TableCell id={row.id} align="left">{row.Gender}</TableCell>
                         <TableCell id={row.id} align="left">{row.Age}</TableCell>
                         <TableCell id={row.id} align="left">{row.Homeland}</TableCell>
                         <TableCell id={row.id} align="left">{row.Grade}</TableCell>
                     </TableRow>
-                     { row.children && row.children.length && child.indexOf(row.id) !==-1?
-                       (
-                         <TableRow>
-                           <TableCell Colspan="5">
-                             {renderTable(row.children)}
-                           </TableCell>
-                         </TableRow>
-                       ) : null
-                     }
-                 </>
+                    {
+                     row.children
+                      &&
+                     row.children.length 
+                      && 
+                     child.indexOf(row.id) !==-1 
+                       ? 
+                      renderChildren(row.children)
+                       :
+                     null
+                    }
+                </>
             )}
       </>
     )
  }
-  /*-----------------------------------Table--------------------------------*/
-  const renderTable = rows => {
-    return(
-      <Paper>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>
-              <span>Name</span>
-            </TableCell>
-            <TableCell>
-              <span>Gender</span>
-            </TableCell>
-            <TableCell>
-              <span>Age</span>
-            </TableCell>
-            <TableCell>
-              <span>Homeland</span>
-            </TableCell>
-            <TableCell>
-              <span>Grade</span>
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {renderNested(rows)}
-        </TableBody>
-      </Table>
-      </Paper>
-
-    )
-  }
   /*-----------------------------------Default Render--------------------------------*/
   const defaultRender = () => {
     return (
       <div className="panel">
         <header className="panel-heading">User Information</header>
         <div className="panel-body">
-            {renderTable(rows)}
+          <Paper>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>
+                      <span>Name</span>
+                  </TableCell>
+                  <TableCell>
+                      <span>Gender</span>
+                  </TableCell>
+                  <TableCell>
+                      <span>Age</span>
+                  </TableCell>
+                  <TableCell>
+                      <span>Homeland</span>
+                  </TableCell>
+                  <TableCell>
+                      <span>Grade</span>
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                  {renderNested(rows)} 
+              </TableBody>
+            </Table>
+          </Paper>
         </div>
       </div>
     );
